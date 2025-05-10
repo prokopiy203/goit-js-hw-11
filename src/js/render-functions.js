@@ -1,8 +1,17 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+export const simpleLight = new SimpleLightbox('.js-gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+const gallery = document.querySelector('.js-gallery');
+
 export function createGallery(images) {
   return images
     .map(
       ({
-        type,
+        tags,
         largeImageURL,
         webformatURL,
         likes,
@@ -12,7 +21,7 @@ export function createGallery(images) {
       }) => `<li class="gallery-item ">
                 <div>
                     <a href="${largeImageURL}" class="link">
-                        <img src="${webformatURL}" alt="${type}" class="gallery-image">
+                        <img src="${webformatURL}" alt="${tags}" class="gallery-image">
                     </a>
                 </div>
                 <div>
@@ -46,4 +55,8 @@ export function showElement(element) {
 
 export function hideElement(element) {
   element.classList.add('hidden');
+}
+
+export function clearGallery() {
+  gallery.innerHTML = '';
 }
